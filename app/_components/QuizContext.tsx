@@ -22,6 +22,14 @@ interface QuizContextType {
   correct: boolean;
   setIncorrect: Dispatch<SetStateAction<boolean>>;
   incorrect: boolean;
+  setUnselectedError: Dispatch<SetStateAction<boolean>>;
+  unselectedError: boolean;
+  setQuestionNum: Dispatch<SetStateAction<number>>;
+  questionNum: number;
+  setShowResult: Dispatch<SetStateAction<boolean>>;
+  showResult: boolean;
+  score: number;
+  handlePlayAgain: () => void;
 }
 
 const QuizContext = createContext<QuizContextType | undefined>(undefined); // Provide an empty object as the default value
@@ -34,15 +42,50 @@ function QuizeProvider({ children }: { children: ReactNode }) {
   const [correct, setCorrect] = useState<boolean>(false);
   const [incorrect, setIncorrect] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string>("");
+  const [unselectedError, setUnselectedError] = useState<boolean>(false);
+  const [questionNum, setQuestionNum] = useState<number>(0);
+  const [showResult, setShowResult] = useState<boolean>(false);
+  const [score, setScore] = useState<number>(0);
 
   const handleSubmitAnswer = function () {
     setCorrect(false);
-    if (clientSideData?.questions[0].answer === answer) {
-      setCorrect(true);
-      console.log("YESSSS");
-    } else console.log("NOOOO");
-    setIncorrect(true);
-    console.log("clicked...");
+    if (answer) {
+      if (clientSideData?.questions[questionNum].answer === answer) {
+        setCorrect(true);
+        setUnselectedError(false);
+        console.log("YESSSS");
+      } else console.log("NOOOO");
+      setIncorrect(true);
+      console.log("clicked...");
+      setUnselectedError(false);
+    } else {
+      setUnselectedError(true);
+    }
+
+    if (correct) setScore((score) => score + 1);
+
+    if (correct || incorrect) {
+      if (questionNum < 9) {
+        setQuestionNum((num) => num + 1);
+        setCorrect(false);
+        setIncorrect(false);
+        setAnswer("");
+      } else {
+        setCorrect(false);
+        setIncorrect(false);
+        setShowResult(true);
+      }
+    }
+  };
+
+  const handlePlayAgain = function () {
+    setTimeout(() => {
+      setCorrect(false);
+      setIncorrect(false);
+      setAnswer("");
+      setShowResult(false);
+      setQuestionNum(0); // Reset to the first question
+    }, 1000); // Delay of 1 second (1000 milliseconds)
   };
 
   return (
@@ -59,6 +102,14 @@ function QuizeProvider({ children }: { children: ReactNode }) {
         setCorrect,
         setIncorrect,
         incorrect,
+        setUnselectedError,
+        unselectedError,
+        questionNum,
+        setQuestionNum,
+        showResult,
+        setShowResult,
+        score,
+        handlePlayAgain,
       }}
     >
       {children}

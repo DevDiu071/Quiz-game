@@ -4,6 +4,10 @@ export interface Quiz {
   questions: Question[];
 }
 
+export interface ClientSideData {
+  clientSideData: Quiz;
+}
+
 export interface Question {
   question: string;
   options: string[];
