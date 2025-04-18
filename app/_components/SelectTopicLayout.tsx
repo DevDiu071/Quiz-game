@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import data from "@/app/_lib/data.json";
 import { Quiz } from "../_lib/types";
@@ -10,7 +10,7 @@ import { useLocalStorage } from "./UseLocalStorage";
 
 export default function SelectTopicLayout() {
   const quizzes: Quiz[] = data.quizzes;
-  const { topic, setTopic } = useQuiz();
+  const { setTopic } = useQuiz();
 
   const { setItem, getItem } = useLocalStorage("value");
 

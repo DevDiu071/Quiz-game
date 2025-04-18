@@ -84,6 +84,7 @@ function QuizeProvider({ children }: { children: ReactNode }) {
       setIncorrect(false);
       setAnswer("");
       setShowResult(false);
+      setScore(0);
       setQuestionNum(0); // Reset to the first question
     }, 1000); // Delay of 1 second (1000 milliseconds)
   };

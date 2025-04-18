@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useQuiz } from "./QuizContext";
 import { useLocalStorage } from "./UseLocalStorage";
 import iconError from "@/public/assets/images/icon-error.svg";
-import { Quiz } from "../_lib/types";
 import Image from "next/image";
 import clsx from "clsx";
 import Result from "./Result";
 import Link from "next/link";
 
+import tickIcon from "@/public/assets/images/icon-correct.svg";
+import xIcon from "@/public/assets/images/icon-incorrect.svg";
+
 export default function QuizLayout() {
-  const { topic } = useQuiz();
   const { getItem } = useLocalStorage("value");
   const {
     clientSideData,
@@ -88,17 +89,13 @@ export default function QuizLayout() {
                     console.log(answer);
                   }}
                   className={clsx(
-                    "flex px-3 py-3 bg-navy  cursor-pointer rounded-xl items-center mt-2 gap-x-4",
+                    "flex px-2 py-3 bg-navy h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
                     {
                       "border-2 border-green":
                         correct &&
                         option ===
                           clientSideData?.questions[questionNum].answer,
-                      "border-2 border-yellow-100":
-                        incorrect &&
-                        option !== answer &&
-                        option ===
-                          clientSideData?.questions[questionNum].answer,
+
                       "border-red-500":
                         incorrect &&
                         option === answer &&
@@ -113,32 +110,88 @@ export default function QuizLayout() {
                     }
                   )}
                 >
-                  <div
-                    className={clsx(
-                      "h-9 w-9 rounded-md flex justify-center items-center",
-                      {
-                        "bg-green text-white":
-                          correct &&
-                          option ===
-                            clientSideData?.questions[questionNum].answer,
+                  <div className="flex gap-x-4 items-center">
+                    <div
+                      className={clsx(
+                        "h-9 w-9 leading-4 rounded-md font-semibold flex justify-center items-center",
+                        {
+                          "bg-green text-white":
+                            correct &&
+                            option ===
+                              clientSideData?.questions[questionNum].answer,
 
-                        "bg-light-orange ":
-                          !correct ||
-                          option !==
-                            clientSideData?.questions[questionNum].answer,
-                        "bg-red-500 text-white":
-                          incorrect &&
-                          option === answer &&
-                          option !==
-                            clientSideData?.questions[questionNum].answer,
-                      }
-                    )}
-                  >
-                    {letters[i]}
+                          "bg-light-orange ":
+                            !correct ||
+                            option !==
+                              clientSideData?.questions[questionNum].answer,
+                          "bg-red-500 text-white":
+                            incorrect &&
+                            option === answer &&
+                            option !==
+                              clientSideData?.questions[questionNum].answer,
+                        }
+                      )}
+                    >
+                      {letters[i]}
+                    </div>
+                    <span className="text-white font-sans font-bold text-lg">
+                      {option}
+                    </span>
                   </div>
-                  <span className="text-white font-sans font-bold text-lg">
-                    {option}
-                  </span>
+                  <Image
+                    src={tickIcon}
+                    alt="correct-icon"
+                    width={25}
+                    height={25}
+                    className={clsx({
+                      block:
+                        correct &&
+                        answer ===
+                          clientSideData?.questions[questionNum].answer,
+                      hidden:
+                        !correct ||
+                        option !==
+                          clientSideData?.questions[questionNum].answer,
+                    })}
+                  />
+                  <Image
+                    src={tickIcon}
+                    alt="correct-icon"
+                    width={25}
+                    height={25}
+                    className={clsx({
+                      block:
+                        !correct ||
+                        option !==
+                          clientSideData?.questions[questionNum].answer,
+                      hidden:
+                        correct ||
+                        !incorrect ||
+                        option !==
+                          clientSideData?.questions[questionNum].answer,
+                    })}
+                  />
+
+                  <Image
+                    src={xIcon}
+                    alt="correct-icon"
+                    width={25}
+                    height={25}
+                    className={clsx({
+                      block:
+                        incorrect &&
+                        answer !== "" &&
+                        option === answer &&
+                        option !==
+                          clientSideData?.questions[questionNum].answer,
+                      hidden:
+                        !incorrect ||
+                        answer === "" ||
+                        option !== answer ||
+                        option ===
+                          clientSideData?.questions[questionNum].answer,
+                    })}
+                  />
                 </div>
               </div>
             ))}
@@ -168,7 +221,7 @@ export default function QuizLayout() {
           </Link>
         )}
         {unselectedError && (
-          <div className="flex items-center gap-x-2 justify-center">
+          <div className="flex items-center gap-x-2 mt-2 justify-center">
             <Image src={iconError} width={22} height={22} alt="error icon" />
             <p className="text-white">Please select an answer</p>
           </div>
