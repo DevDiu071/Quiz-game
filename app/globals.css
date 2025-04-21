@@ -15,8 +15,13 @@
   --color-green: #26d782;
   --color-green-two: #26d782;
   --color-purple: #a729f5;
+  --color-purple-light: #ae6bd8;
+  --color-purple-lighter: #f6e7ff;
 
   /* Color with alpha support */
   --color-accent: 131 56 236; /* RGB values without commas */
   --font-main: var(--font-Rubik);
+}
+body {
+  /* background-color: #e6beffba; */
 }

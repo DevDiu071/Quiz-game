@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { ClientSideData, Quiz } from "../_lib/types";
+import { ClientSideData } from "../_lib/types";
 import js from "@/public/assets/images/icon-js.svg";
 import { useQuiz } from "./QuizContext";
 

@@ -8,11 +8,11 @@ import sunLight from "@/public/assets/images/icon-sun-light.svg";
 import { useQuiz } from "./QuizContext";
 
 export default function Header() {
-  const { clientSideData } = useQuiz();
+  const { clientSideData, showResult } = useQuiz();
 
   return (
-    <div className="flex mt-14 mb-[20px] max-w-[900px]  sm:mx-auto justify-between">
-      <div className="flex items-center gap-x-2">
+    <div className="flex mt-6 md:mt-14 mb-[20px] max-w-[900px] mx-5  md:mx-auto md:px-3 justify-between">
+      <div className="flex items-center gap-x-4">
         {clientSideData && (
           <div className="bg-light-orange h-9 w-9 rounded-md flex justify-center items-center">
             <Image

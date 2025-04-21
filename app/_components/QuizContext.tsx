@@ -30,6 +30,9 @@ interface QuizContextType {
   showResult: boolean;
   score: number;
   handlePlayAgain: () => void;
+  progress: number;
+  setProgress: Dispatch<SetStateAction<number>>;
+  timeupAndUpdate: () => void;
 }
 
 const QuizContext = createContext<QuizContextType | undefined>(undefined); // Provide an empty object as the default value
@@ -39,6 +42,7 @@ function QuizeProvider({ children }: { children: ReactNode }) {
   const [clientSideData, setClientSideData] = useState<Quiz | undefined>(
     undefined
   );
+  const [progress, setProgress] = useState(100); // Start at 100% progress
   const [correct, setCorrect] = useState<boolean>(false);
   const [incorrect, setIncorrect] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string>("");
@@ -46,6 +50,21 @@ function QuizeProvider({ children }: { children: ReactNode }) {
   const [questionNum, setQuestionNum] = useState<number>(0);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
+
+  const timeupAndUpdate = function () {
+    if (progress === 0) {
+      if (questionNum < 9) {
+        setQuestionNum((num) => num + 1);
+        setCorrect(false);
+        setIncorrect(false);
+        setAnswer("");
+      } else {
+        setCorrect(false);
+        setIncorrect(false);
+        setShowResult(true);
+      }
+    }
+  };
 
   const handleSubmitAnswer = function () {
     setCorrect(false);
@@ -79,6 +98,7 @@ function QuizeProvider({ children }: { children: ReactNode }) {
   };
 
   const handlePlayAgain = function () {
+    setClientSideData(undefined);
     setTimeout(() => {
       setCorrect(false);
       setIncorrect(false);
@@ -111,6 +131,9 @@ function QuizeProvider({ children }: { children: ReactNode }) {
         setShowResult,
         score,
         handlePlayAgain,
+        progress,
+        setProgress,
+        timeupAndUpdate,
       }}
     >
       {children}

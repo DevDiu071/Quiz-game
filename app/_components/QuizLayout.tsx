@@ -11,6 +11,7 @@ import Link from "next/link";
 
 import tickIcon from "@/public/assets/images/icon-correct.svg";
 import xIcon from "@/public/assets/images/icon-incorrect.svg";
+import TimeBar from "./TimeBar";
 
 export default function QuizLayout() {
   const { getItem } = useLocalStorage("value");
@@ -19,7 +20,7 @@ export default function QuizLayout() {
     setClientSideData,
     setAnswer,
     answer,
-    handleSubmitAnswer,
+    timeupAndUpdate,
     correct,
     setCorrect,
     incorrect,
@@ -28,6 +29,7 @@ export default function QuizLayout() {
     questionNum,
     showResult,
     handlePlayAgain,
+    handleSubmitAnswer,
   } = useQuiz();
   const letters = ["A", "B", "C", "D"];
 
@@ -48,7 +50,7 @@ export default function QuizLayout() {
   }
   return (
     <div
-      className={` grid grid-cols-1 sm:grid-cols-2 sm:gap-x-[100px]  px-3 pt-6 font-Rubik max-w-[900px] mx-4 sm:mx-auto`}
+      className={` grid grid-cols-1 md:grid-cols-2 md:gap-x-[100px]  px-3 pt-6 font-Rubik max-w-[900px] mx-4 md:mx-auto`}
     >
       <div
         className={clsx({
@@ -62,21 +64,17 @@ export default function QuizLayout() {
           </p>
         )}
         {!showResult && (
-          <p className="text-white min-h-[100px] mb-[150px]  font-sans text-xl sm:text-3xl flex flex-col">
+          <p className="text-white min-h-[50px] md:min-h-[100px] mb-5 md:mb-[150px] font-sans text-xl md:text-3xl flex flex-col">
             {clientSideData?.questions[questionNum].question}
           </p>
         )}
         {showResult && (
-          <div className="min-h-[100px] mb-[150px] text-xl sm:text-3xl text-white">
+          <div className="mb-[50px] md:mb-[150px] text-[40px] leading-11 md:text-[40px] text-white">
             <p>Quiz Completed</p>
             <p className="font-bold">You Scored...</p>
           </div>
         )}
-        {!showResult && (
-          <div className="block relative bg-navy h-3 rounded-lg">
-            <div className="bg-purple absolute top-1/2 transform -translate-y-1/2 w-[100px]  rounded-lg h-2"></div>
-          </div>
-        )}
+        {!showResult && <TimeBar />}
       </div>
       <div>
         {!showResult ? (
@@ -86,7 +84,8 @@ export default function QuizLayout() {
                 <div
                   onClick={() => {
                     setAnswer(option);
-                    console.log(answer);
+                    console.log(option);
+                    console.log("EVALUTATE: ", answer === option);
                   }}
                   className={clsx(
                     "flex px-2 py-3 bg-navy h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
@@ -103,6 +102,8 @@ export default function QuizLayout() {
                           clientSideData?.questions[questionNum].answer,
                       "border-2 border-blue-600":
                         option === answer && !correct && !incorrect,
+                      "border-2 border-purple":
+                        option === answer && (!correct || !incorrect),
                       "border-2 border-navy":
                         !correct ||
                         answer !==
@@ -113,13 +114,14 @@ export default function QuizLayout() {
                   <div className="flex gap-x-4 items-center">
                     <div
                       className={clsx(
-                        "h-9 w-9 leading-4 rounded-md font-semibold flex justify-center items-center",
+                        "h-9 w-9 leading-4 transition-all rounded-md font-semibold flex justify-center items-center",
                         {
                           "bg-green text-white":
                             correct &&
                             option ===
                               clientSideData?.questions[questionNum].answer,
-
+                          "bg-purple text-white":
+                            option === answer && (!correct || !incorrect),
                           "bg-light-orange ":
                             !correct ||
                             option !==
@@ -129,7 +131,8 @@ export default function QuizLayout() {
                             option === answer &&
                             option !==
                               clientSideData?.questions[questionNum].answer,
-                        }
+                        },
+                        " hover:text-purple hover:bg-purple-lighter font-bold"
                       )}
                     >
                       {letters[i]}
@@ -202,10 +205,15 @@ export default function QuizLayout() {
         {!showResult && (
           <button
             onClick={handleSubmitAnswer}
-            className="bg-purple w-full font-semibold cursor-pointer text-white py-3.5 px-3 rounded-xl mt-5"
+            className="bg-purple w-full hover:bg-purple-light transition-all font-semibold cursor-pointer text-white py-3.5 px-3 rounded-xl mt-5"
           >
             {`${
-              correct || incorrect
+              (questionNum === clientSideData.questions.length - 1 &&
+                !showResult &&
+                correct) ||
+              incorrect
+                ? "Show Result"
+                : correct || incorrect
                 ? "Next Question"
                 : !showResult
                 ? "Submit Question"
