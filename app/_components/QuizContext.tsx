@@ -33,6 +33,8 @@ interface QuizContextType {
   progress: number;
   setProgress: Dispatch<SetStateAction<number>>;
   timeupAndUpdate: () => void;
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
+  darkMode: boolean;
 }
 
 const QuizContext = createContext<QuizContextType | undefined>(undefined); // Provide an empty object as the default value
@@ -50,6 +52,8 @@ function QuizeProvider({ children }: { children: ReactNode }) {
   const [questionNum, setQuestionNum] = useState<number>(0);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
+
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   const timeupAndUpdate = function () {
     if (progress === 0) {
@@ -134,6 +138,8 @@ function QuizeProvider({ children }: { children: ReactNode }) {
         progress,
         setProgress,
         timeupAndUpdate,
+        setDarkMode,
+        darkMode,
       }}
     >
       {children}

@@ -11,7 +11,7 @@ export default function TimeBar() {
     }
   }, [questionNum, clientSideData, setProgress]);
   return (
-    <div className="block relative bg-navy mb-8 h-3 rounded-lg">
+    <div className="block relative dark:bg-navy bg-white mb-8 h-3 rounded-lg">
       <div
         className={`bg-purple absolute top-1/2 transform -translate-y-1/2 rounded-lg h-2 transition-all duration-500 ease-linear 
         `}

@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  /* Simple color definition */
+  /* Dark theme */
   --color-primary: #3a86ff;
 
-  /* Color palette with shades */
   --color-navy: #3b4d66;
   --color-bgColor: #313e51;
   --color-light-orange: #fff1e9;
@@ -18,10 +19,16 @@
   --color-purple-light: #ae6bd8;
   --color-purple-lighter: #f6e7ff;
 
+  /* Light theme */
+  --color-bg-light: #f4f6fa;
+  --color-topicBg-light: #ffffff;
+  --color-text-light: #313e51;
+  --color-grey-navy: #626c7f;
+  --color-icon-bgcolor: #f6e7ff;
+  --color-white: #ffffff;
+  --color-light-grey: #f4f6fa;
+
   /* Color with alpha support */
   --color-accent: 131 56 236; /* RGB values without commas */
   --font-main: var(--font-Rubik);
-}
-body {
-  /* background-color: #e6beffba; */
 }

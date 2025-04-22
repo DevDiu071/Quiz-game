@@ -27,11 +27,11 @@ export default function SelectTopicLayout() {
           key={Math.random()}
           href={`/${quiz.title}`}
         >
-          <div className="flex px-2.5 py-3 bg-navy cursor-pointer rounded-lg items-center mt-2 gap-x-4">
+          <div className="flex px-2.5 py-3 dark:bg-navy bg-topicBg-light cursor-pointer rounded-xl items-center mt-2 gap-x-4">
             <div className="bg-light-orange h-9 w-9 rounded-md flex justify-center items-center">
               <Image src={quiz.icon} alt="icon" width={28} height={28} />
             </div>
-            <span className="text-white font-sans font-bold text-xl">
+            <span className="dark:text-white text-text-light font-sans font-bold text-xl">
               {quiz.title}
             </span>
           </div>

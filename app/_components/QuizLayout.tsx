@@ -20,7 +20,7 @@ export default function QuizLayout() {
     setClientSideData,
     setAnswer,
     answer,
-    timeupAndUpdate,
+
     correct,
     setCorrect,
     incorrect,
@@ -59,17 +59,17 @@ export default function QuizLayout() {
         })}
       >
         {!showResult && (
-          <p className="mt-1 text-lg italic  text-light-bluish">
+          <p className="mt-1 text-lg italic  dark:text-light-bluish text-grey-navy">
             Question {questionNum + 1} of {clientSideData.questions.length}
           </p>
         )}
         {!showResult && (
-          <p className="text-white min-h-[50px] md:min-h-[100px] mb-5 md:mb-[150px] font-sans text-xl md:text-3xl flex flex-col">
+          <p className="dark:text-white text-text-light min-h-[50px] md:min-h-[100px] mb-5 md:mb-[150px] font-sans text-xl md:text-3xl flex flex-col">
             {clientSideData?.questions[questionNum].question}
           </p>
         )}
         {showResult && (
-          <div className="mb-[50px] md:mb-[150px] text-[40px] leading-11 md:text-[40px] text-white">
+          <div className="mb-[50px] md:mb-[150px] text-[40px] leading-11 md:text-[40px] dark:text-white text-text-light">
             <p>Quiz Completed</p>
             <p className="font-bold">You Scored...</p>
           </div>
@@ -88,7 +88,7 @@ export default function QuizLayout() {
                     console.log("EVALUTATE: ", answer === option);
                   }}
                   className={clsx(
-                    "flex px-2 py-3 bg-navy h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
+                    "flex px-2 py-3 dark:bg-navy bg-topicBg-light h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
                     {
                       "border-2 border-green":
                         correct &&
@@ -102,9 +102,9 @@ export default function QuizLayout() {
                           clientSideData?.questions[questionNum].answer,
                       "border-2 border-blue-600":
                         option === answer && !correct && !incorrect,
-                      "border-2 border-purple":
+                      "border-2 !border-purple":
                         option === answer && (!correct || !incorrect),
-                      "border-2 border-navy":
+                      "border-2 border-topicBg-light dark:border-navy":
                         !correct ||
                         answer !==
                           clientSideData?.questions[questionNum].answer,
@@ -120,9 +120,9 @@ export default function QuizLayout() {
                             correct &&
                             option ===
                               clientSideData?.questions[questionNum].answer,
-                          "bg-purple text-white":
+                          "!bg-purple text-white":
                             option === answer && (!correct || !incorrect),
-                          "bg-light-orange ":
+                          "bg-light-grey dark:bg-light-orange  text-text-light":
                             !correct ||
                             option !==
                               clientSideData?.questions[questionNum].answer,
@@ -132,12 +132,12 @@ export default function QuizLayout() {
                             option !==
                               clientSideData?.questions[questionNum].answer,
                         },
-                        " hover:text-purple hover:bg-purple-lighter font-bold"
+                        " hover:text-purple  hover:bg-purple-lighter font-bold"
                       )}
                     >
                       {letters[i]}
                     </div>
-                    <span className="text-white font-sans font-bold text-lg">
+                    <span className="dark:text-white text-text-light font-sans font-bold text-lg">
                       {option}
                     </span>
                   </div>
