@@ -995,6 +995,11 @@
       height: 90px;
     }
   }
+  .lg\:h-\[92px\] {
+    @media (width >= 1024px) {
+      height: 92px;
+    }
+  }
   .lg\:w-5 {
     @media (width >= 1024px) {
       width: calc(var(--spacing) * 5);

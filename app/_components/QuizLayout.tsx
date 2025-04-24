@@ -230,7 +230,7 @@ export default function QuizLayout() {
         )}
         {showResult && (
           <Link href="/" onClick={handlePlayAgain}>
-            <button className="bg-purple w-full font-semibold cursor-pointer text-white py-3.5 px-3 rounded-xl mt-5">
+            <button className="bg-purple w-full font-semibold lg:h-[92px] lg:text-[28px] cursor-pointer text-white py-3.5 px-3 rounded-xl lg:rounded-3xl mt-5">
               Play Again
             </button>
           </Link>
