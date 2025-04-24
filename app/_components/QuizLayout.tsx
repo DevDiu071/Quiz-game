@@ -211,7 +211,10 @@ export default function QuizLayout() {
         {!showResult && (
           <button
             onClick={handleSubmitAnswer}
-            className="bg-purple w-full hover:bg-purple-light md:text-[28px] text-[18px] transition-all md:h-[92px] h-[56px] font-semibold cursor-pointer text-white px-3 md:rounded-3xl rounded-xl mt-5 md:mt-8"
+            className={clsx(
+              "bg-purple w-full hover:bg-purple-light md:text-[28px] text-[18px] transition-all md:h-[92px] h-[56px] font-semibold cursor-pointer text-white px-3 md:rounded-3xl rounded-xl mt-5 md:mt-8",
+              { "mb-6": !unselectedError }
+            )}
           >
             {`${
               questionNum === clientSideData.questions.length - 1 &&
