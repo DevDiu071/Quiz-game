@@ -87,15 +87,21 @@ export default function QuizLayout() {
                     console.log(option);
                     console.log("EVALUTATE: ", answer === option);
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setAnswer(option);
+                    }
+                  }}
+                  tabIndex={0}
                   className={clsx(
-                    "flex px-2 py-3 dark:bg-navy bg-topicBg-light h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
+                    "flex px-2 py-3 dark:bg-navy light-shadow bg-topicBg-light h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
                     {
                       "border-2 border-green":
                         correct &&
                         option ===
                           clientSideData?.questions[questionNum].answer,
 
-                      "border-red-500":
+                      "!border-red-500":
                         incorrect &&
                         option === answer &&
                         option !==
@@ -126,7 +132,7 @@ export default function QuizLayout() {
                             !correct ||
                             option !==
                               clientSideData?.questions[questionNum].answer,
-                          "bg-red-500 text-white":
+                          "!bg-red-500 text-white":
                             incorrect &&
                             option === answer &&
                             option !==
@@ -208,10 +214,8 @@ export default function QuizLayout() {
             className="bg-purple w-full hover:bg-purple-light transition-all font-semibold cursor-pointer text-white py-3.5 px-3 rounded-xl mt-5"
           >
             {`${
-              (questionNum === clientSideData.questions.length - 1 &&
-                !showResult &&
-                correct) ||
-              incorrect
+              questionNum === clientSideData.questions.length - 1 &&
+              (correct || incorrect)
                 ? "Show Result"
                 : correct || incorrect
                 ? "Next Question"
@@ -231,7 +235,9 @@ export default function QuizLayout() {
         {unselectedError && (
           <div className="flex items-center gap-x-2 mt-2 justify-center">
             <Image src={iconError} width={22} height={22} alt="error icon" />
-            <p className="text-white">Please select an answer</p>
+            <p className="dark:text-white text-text-light">
+              Please select an answer
+            </p>
           </div>
         )}
       </div>

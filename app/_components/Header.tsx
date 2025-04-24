@@ -9,6 +9,7 @@ import sunLight from "@/public/assets/images/icon-sun-light.svg";
 import sunDark from "@/public/assets/images/icon-sun-dark.svg";
 import { useQuiz } from "./QuizContext";
 import { useTheme } from "next-themes";
+import clsx from "clsx";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -18,7 +19,17 @@ export default function Header() {
     <div className="flex mt-6 md:mt-14 mb-[20px] max-w-[900px] mx-5  md:mx-auto md:px-3 justify-between">
       <div className="flex items-center gap-x-4">
         {clientSideData && (
-          <div className="dark:bg-light-orange bg-icon-bgcolor h-9 w-9 rounded-md flex justify-center items-center">
+          <div
+            className={clsx(
+              " h-9 w-9 rounded-md flex justify-center items-center",
+              {
+                "bg-light-orange": clientSideData.title === "HTML",
+                "bg-light-green": clientSideData.title === "CSS",
+                "bg-lighter-green": clientSideData.title === "JavaScript",
+                "bg-purple-lighter": clientSideData.title === "Accessibility",
+              }
+            )}
+          >
             <Image
               src={clientSideData?.icon || js}
               alt="icon"
@@ -50,11 +61,12 @@ export default function Header() {
         />
         <div
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="bg-purple relative transition-position cursor-pointer h-5 w-8 rounded-2xl"
+          className="bg-purple relative cursor-pointer h-5 w-8 rounded-2xl"
         >
           <div
-            className={`bg-white cursor-pointer  h-3 w-3 absolute inset-y-0 my-auto ${
-              theme === "dark" ? "right-1" : "left-1"
+            suppressHydrationWarning
+            className={`bg-white absolute !transition-all duration-300 ease-in-out cursor-pointer h-3 w-3 inset-y-0 my-auto ${
+              theme === "dark" ? "right-1" : "right-4"
             } rounded-full flex items-center`}
           ></div>
         </div>

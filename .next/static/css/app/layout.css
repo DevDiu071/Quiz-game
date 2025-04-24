@@ -86,6 +86,8 @@
     --color-bgColor: #313e51;
     --color-light-orange: #fff1e9;
     --color-light-bluish: #abc1e1;
+    --color-light-green: #e0fdef;
+    --color-lighter-green: #ebf0ff;
     --color-green: #26d782;
     --color-purple: #a729f5;
     --color-purple-light: #ae6bd8;
@@ -94,7 +96,6 @@
     --color-topicBg-light: #ffffff;
     --color-text-light: #313e51;
     --color-grey-navy: #626c7f;
-    --color-icon-bgcolor: #f6e7ff;
     --color-light-grey: #f4f6fa;
     --font-main: var(--font-Rubik);
   }
@@ -272,26 +273,8 @@
   .right-1 {
     right: calc(var(--spacing) * 1);
   }
-  .left-1 {
-    left: calc(var(--spacing) * 1);
-  }
-  .\!container {
-    width: 100% !important;
-    @media (width >= 40rem) {
-      max-width: 40rem !important;
-    }
-    @media (width >= 48rem) {
-      max-width: 48rem !important;
-    }
-    @media (width >= 64rem) {
-      max-width: 64rem !important;
-    }
-    @media (width >= 80rem) {
-      max-width: 80rem !important;
-    }
-    @media (width >= 96rem) {
-      max-width: 96rem !important;
-    }
+  .right-4 {
+    right: calc(var(--spacing) * 4);
   }
   .container {
     width: 100%;
@@ -453,8 +436,8 @@
   .gap-y-1\.5 {
     row-gap: calc(var(--spacing) * 1.5);
   }
-  .gap-y-3 {
-    row-gap: calc(var(--spacing) * 3);
+  .gap-y-2 {
+    row-gap: calc(var(--spacing) * 2);
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl);
@@ -482,20 +465,14 @@
   .\!border-purple {
     border-color: var(--color-purple) !important;
   }
+  .\!border-red-500 {
+    border-color: var(--color-red-500) !important;
+  }
   .border-blue-600 {
     border-color: var(--color-blue-600);
   }
   .border-green {
     border-color: var(--color-green);
-  }
-  .border-navy {
-    border-color: var(--color-navy);
-  }
-  .border-purple {
-    border-color: var(--color-purple);
-  }
-  .border-red-500 {
-    border-color: var(--color-red-500);
   }
   .border-topicBg-light {
     border-color: var(--color-topicBg-light);
@@ -503,14 +480,17 @@
   .\!bg-purple {
     background-color: var(--color-purple) !important;
   }
+  .\!bg-red-500 {
+    background-color: var(--color-red-500) !important;
+  }
   .bg-bg-light {
     background-color: var(--color-bg-light);
   }
   .bg-green {
     background-color: var(--color-green);
   }
-  .bg-icon-bgcolor {
-    background-color: var(--color-icon-bgcolor);
+  .bg-light-green {
+    background-color: var(--color-light-green);
   }
   .bg-light-grey {
     background-color: var(--color-light-grey);
@@ -518,14 +498,14 @@
   .bg-light-orange {
     background-color: var(--color-light-orange);
   }
-  .bg-navy {
-    background-color: var(--color-navy);
+  .bg-lighter-green {
+    background-color: var(--color-lighter-green);
   }
   .bg-purple {
     background-color: var(--color-purple);
   }
-  .bg-red-500 {
-    background-color: var(--color-red-500);
+  .bg-purple-lighter {
+    background-color: var(--color-purple-lighter);
   }
   .bg-topicBg-light {
     background-color: var(--color-topicBg-light);
@@ -533,8 +513,8 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .bg-\[url\(\'\/assets\/images\/pattern-background-mobile-dark\.svg\'\)\] {
-    background-image: url('/assets/images/pattern-background-mobile-dark.svg');
+  .bg-\[url\(\'\/assets\/images\/pattern-background-mobile-light\.svg\'\)\] {
+    background-image: url('/assets/images/pattern-background-mobile-light.svg');
   }
   .bg-cover {
     background-size: cover;
@@ -630,12 +610,6 @@
   .text-grey-navy {
     color: var(--color-grey-navy);
   }
-  .text-light-bluish {
-    color: var(--color-light-bluish);
-  }
-  .text-light-grey {
-    color: var(--color-light-grey);
-  }
   .text-text-light {
     color: var(--color-text-light);
   }
@@ -676,6 +650,11 @@
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
+  .\!transition-all {
+    transition-property: all !important;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function)) !important;
+    transition-duration: var(--tw-duration, var(--default-transition-duration)) !important;
+  }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -685,6 +664,10 @@
     transition-property: all;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-300 {
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
   }
   .duration-500 {
     --tw-duration: 500ms;
@@ -809,19 +792,14 @@
       background-color: var(--color-navy);
     }
   }
-  .dark\:bg-red-600 {
+  .dark\:bg-\[url\(\'\/assets\/images\/pattern-background-mobile-dark\.svg\'\)\] {
     &:where(.dark, .dark *) {
-      background-color: var(--color-red-600);
+      background-image: url('/assets/images/pattern-background-mobile-dark.svg');
     }
   }
   .dark\:text-light-bluish {
     &:where(.dark, .dark *) {
       color: var(--color-light-bluish);
-    }
-  }
-  .dark\:text-text-light {
-    &:where(.dark, .dark *) {
-      color: var(--color-text-light);
     }
   }
   .dark\:text-white {
@@ -835,6 +813,11 @@
         background-image: url('/assets/images/pattern-background-desktop-dark.svg');
       }
     }
+  }
+}
+@layer utilities {
+  .light-shadow {
+    box-shadow: 0 1px 15px #00000013;
   }
 }
 @property --tw-translate-x {
