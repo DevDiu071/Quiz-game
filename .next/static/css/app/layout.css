@@ -36,6 +36,7 @@
     --color-green-700: oklch(0.527 0.154 150.069);
     --color-green-800: oklch(0.448 0.119 151.328);
     --color-green-900: oklch(0.393 0.095 152.535);
+    --color-cyan-200: oklch(0.917 0.08 205.041);
     --color-blue-100: oklch(0.932 0.032 255.585);
     --color-blue-200: oklch(0.882 0.059 254.128);
     --color-blue-300: oklch(0.809 0.105 251.813);
@@ -97,6 +98,7 @@
     --color-topicBg-light: #ffffff;
     --color-text-light: #313e51;
     --color-grey-navy: #626c7f;
+    --color-icon-bgcolor: #f6e7ff;
     --color-light-grey: #f4f6fa;
     --font-main: var(--font-Rubik);
   }
@@ -821,6 +823,27 @@
     --tw-ease: var(--ease-out);
     transition-timing-function: var(--ease-out);
   }
+  .hover\:bg-cyan-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-cyan-200);
+      }
+    }
+  }
+  .hover\:bg-icon-bgcolor {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-icon-bgcolor);
+      }
+    }
+  }
+  .hover\:bg-light-green {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-light-green);
+      }
+    }
+  }
   .hover\:bg-purple-light {
     &:hover {
       @media (hover: hover) {
@@ -839,6 +862,20 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-purple);
+      }
+    }
+  }
+  .hover\:text-red-300 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-red-300);
+      }
+    }
+  }
+  .hover\:text-text-light {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-text-light);
       }
     }
   }

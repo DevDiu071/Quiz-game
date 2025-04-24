@@ -126,7 +126,7 @@ export default function QuizLayout() {
                             correct &&
                             option ===
                               clientSideData?.questions[questionNum].answer,
-                          "!bg-purple text-white":
+                          "!bg-purple text-white hover:text-text-light":
                             option === answer && (!correct || !incorrect),
                           "bg-light-grey dark:bg-light-orange  text-text-light":
                             !correct ||
@@ -138,7 +138,7 @@ export default function QuizLayout() {
                             option !==
                               clientSideData?.questions[questionNum].answer,
                         },
-                        " hover:text-purple  hover:bg-purple-lighter font-bold"
+                        " hover:text-purple  hover:bg-icon-bgcolor font-bold"
                       )}
                     >
                       {letters[i]}
