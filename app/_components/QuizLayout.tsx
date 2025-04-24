@@ -50,7 +50,7 @@ export default function QuizLayout() {
   }
   return (
     <div
-      className={` grid grid-cols-1 md:grid-cols-2 md:gap-x-[100px]  px-3 pt-6 font-Rubik max-w-[900px] mx-4 md:mx-auto`}
+      className={` grid grid-cols-1 md:grid-cols-2 md:gap-x-[100px]  px-3 pt-6 font-Rubik max-w-[1160px] mx-4 md:mx-auto`}
     >
       <div
         className={clsx({
@@ -59,12 +59,12 @@ export default function QuizLayout() {
         })}
       >
         {!showResult && (
-          <p className="mt-1 text-lg italic  dark:text-light-bluish text-grey-navy">
+          <p className="mt-1 text-lg italic  dark:text-light-bluish text-grey-navy md:text-[20px]">
             Question {questionNum + 1} of {clientSideData.questions.length}
           </p>
         )}
         {!showResult && (
-          <p className="dark:text-white text-text-light min-h-[50px] md:min-h-[100px] mb-5 md:mb-[150px] font-sans text-xl md:text-3xl flex flex-col">
+          <p className="dark:text-white text-text-light min-h-[50px] md:min-h-[100px] mb-5 md:mb-[250px] font-sans text-xl md:text-[36px] flex flex-col">
             {clientSideData?.questions[questionNum].question}
           </p>
         )}
@@ -78,7 +78,7 @@ export default function QuizLayout() {
       </div>
       <div>
         {!showResult ? (
-          <div className="flex flex-col gap-y-1.5">
+          <div className="flex flex-col gap-y-1.5 md:gap-y-5">
             {clientSideData?.questions[questionNum].options.map((option, i) => (
               <div key={option}>
                 <div
@@ -94,7 +94,7 @@ export default function QuizLayout() {
                   }}
                   tabIndex={0}
                   className={clsx(
-                    "flex px-2 py-3 dark:bg-navy light-shadow bg-topicBg-light h-15 cursor-pointer rounded-xl items-center justify-between mt-2 gap-x-4",
+                    "flex py-3 md:px-[20px] px-[15px] light-shadow sm:max-w-[800px] max-w-[564px] md:h-[92px] h-[64px] dark:bg-navy light-shadow bg-topicBg-light cursor-pointer md:rounded-3xl rounded-xl items-center justify-between mt-2 gap-x-4 md:gap-x-[14px]",
                     {
                       "border-2 border-green":
                         correct &&
@@ -120,7 +120,7 @@ export default function QuizLayout() {
                   <div className="flex gap-x-4 items-center">
                     <div
                       className={clsx(
-                        "h-9 w-9 leading-4 transition-all rounded-md font-semibold flex justify-center items-center",
+                        "md:h-[56px] w-[40px] h-[40px] md:w-[56px] leading-4 text-lg md:text-[28px] transition-all rounded-md font-semibold flex justify-center items-center",
                         {
                           "bg-green text-white":
                             correct &&
@@ -143,15 +143,15 @@ export default function QuizLayout() {
                     >
                       {letters[i]}
                     </div>
-                    <span className="dark:text-white text-text-light font-sans font-bold text-lg">
+                    <span className="dark:text-white text-text-light font-sans text-[17px] md:text-[28px]">
                       {option}
                     </span>
                   </div>
                   <Image
                     src={tickIcon}
                     alt="correct-icon"
-                    width={25}
-                    height={25}
+                    width={30}
+                    height={30}
                     className={clsx({
                       block:
                         correct &&
@@ -166,8 +166,8 @@ export default function QuizLayout() {
                   <Image
                     src={tickIcon}
                     alt="correct-icon"
-                    width={25}
-                    height={25}
+                    width={30}
+                    height={30}
                     className={clsx({
                       block:
                         !correct ||
@@ -184,8 +184,8 @@ export default function QuizLayout() {
                   <Image
                     src={xIcon}
                     alt="correct-icon"
-                    width={25}
-                    height={25}
+                    width={30}
+                    height={30}
                     className={clsx({
                       block:
                         incorrect &&
@@ -211,7 +211,7 @@ export default function QuizLayout() {
         {!showResult && (
           <button
             onClick={handleSubmitAnswer}
-            className="bg-purple w-full hover:bg-purple-light transition-all font-semibold cursor-pointer text-white py-3.5 px-3 rounded-xl mt-5"
+            className="bg-purple w-full hover:bg-purple-light mb-4 md:text-[28px] text-[18px] transition-all md:h-[92px] h-[56px] font-semibold cursor-pointer text-white px-3 md:rounded-3xl rounded-xl mt-5 md:mt-8"
           >
             {`${
               questionNum === clientSideData.questions.length - 1 &&

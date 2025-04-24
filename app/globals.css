@@ -31,6 +31,10 @@
   /* Color with alpha support */
   --color-accent: 131 56 236; /* RGB values without commas */
   --font-main: var(--font-Rubik);
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 850px;
+  --breakpoint-lg: 1024px;
 }
 
 @layer utilities {
