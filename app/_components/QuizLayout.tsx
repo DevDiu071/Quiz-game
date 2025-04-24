@@ -211,7 +211,7 @@ export default function QuizLayout() {
         {!showResult && (
           <button
             onClick={handleSubmitAnswer}
-            className="bg-purple w-full hover:bg-purple-light mb-4 md:text-[28px] text-[18px] transition-all md:h-[92px] h-[56px] font-semibold cursor-pointer text-white px-3 md:rounded-3xl rounded-xl mt-5 md:mt-8"
+            className="bg-purple w-full hover:bg-purple-light md:text-[28px] text-[18px] transition-all md:h-[92px] h-[56px] font-semibold cursor-pointer text-white px-3 md:rounded-3xl rounded-xl mt-5 md:mt-8"
           >
             {`${
               questionNum === clientSideData.questions.length - 1 &&
@@ -235,7 +235,7 @@ export default function QuizLayout() {
         {unselectedError && (
           <div className="flex items-center gap-x-2 mt-2 justify-center">
             <Image src={iconError} width={22} height={22} alt="error icon" />
-            <p className="dark:text-white text-text-light">
+            <p className="dark:text-white text-text-light text-lg mb-2">
               Please select an answer
             </p>
           </div>
